@@ -27,7 +27,7 @@ Shader "TowerDefenseKit/CrystalHalo" {
             Blend One One
             ZWrite Off
             
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #define UNITY_PASS_FORWARDBASE
@@ -66,8 +66,10 @@ Shader "TowerDefenseKit/CrystalHalo" {
                 float3 finalColor = node_1494;
                 return fixed4(finalColor,1);
             }
-            ENDCG
+            ENDHLSL
         }
+        
+        
         Pass {
             Name "ShadowCaster"
             Tags {
@@ -75,9 +77,9 @@ Shader "TowerDefenseKit/CrystalHalo" {
             }
             Offset 1, 1
             
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+           #pragma fragment frag
             #define UNITY_PASS_SHADOWCASTER
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
@@ -108,8 +110,8 @@ Shader "TowerDefenseKit/CrystalHalo" {
                 float3 normalDirection = i.normalDir;
                 SHADOW_CASTER_FRAGMENT(i)
             }
-            ENDCG
-        }
+            ENDHLSL
+        } 
     }
     FallBack "Diffuse"
     CustomEditor "ShaderForgeMaterialInspector"

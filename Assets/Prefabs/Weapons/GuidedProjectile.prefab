@@ -4892,8 +4892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_target: {fileID: 0}
-  m_speed: 0.15
-  m_damage: 10
+  m_speed: 0.07
+  m_damage: 2
 --- !u!135 &13564084
 SphereCollider:
   m_ObjectHideFlags: 0

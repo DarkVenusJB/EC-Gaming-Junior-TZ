@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Scripts.GamePlayLogic
+namespace GamePlayLogic
 {
 	public class Monster : MonoBehaviour, IDamageble
 	{
 		private const float m_reachDistance = 0.3f;
-	
-		 // TODO исправить публичное поле
+		
 		[SerializeField] private float m_speed = 5f;
 		[SerializeField] private int m_maxHP = 30;
 		[SerializeField] private int m_currentHP ;
@@ -15,21 +14,16 @@ namespace Scripts.GamePlayLogic
 
 		public Transform MoveTarget
 		{
-			get
-			{
-				return m_moveTarget;
-			}
-
+			get {return m_moveTarget;}
+			
 			set
 			{
 				if (m_moveTarget == null)
-				{
 					m_moveTarget = value;
-				}
 			}
 		}
-		
-		private void Start() 
+
+		private void Start()
 		{
 			m_currentHP = m_maxHP;
 		}
@@ -41,7 +35,7 @@ namespace Scripts.GamePlayLogic
 		
 			if (Vector3.Distance (transform.position, MoveTarget.position) <= m_reachDistance) 
 			{
-				Destroy (gameObject);
+				Deactivate();
 				return;
 			}
 
@@ -56,14 +50,18 @@ namespace Scripts.GamePlayLogic
 				Die();
 		}
 
-		public void Die()
-		{
-			Destroy(gameObject);
-		}
+		public void Die() => Deactivate();
+		
 
 		private void MoveToTheTarget()
 		{
 			transform.position	= Vector3.MoveTowards(transform.position, MoveTarget.position , m_speed *Time.deltaTime);
+		}
+
+		private void Deactivate()
+		{
+			m_currentHP = m_maxHP;
+			gameObject.SetActive(false);
 		}
 	}
 }

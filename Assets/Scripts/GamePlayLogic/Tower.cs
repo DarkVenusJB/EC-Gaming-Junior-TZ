@@ -1,29 +1,42 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-namespace Scripts.GamePlayLogic
+namespace GamePlayLogic
 {
     public abstract class Tower : MonoBehaviour
     {
+        [Header("Shoot Parametres")]
         [SerializeField] private float m_shootInterval = 0.5f;
         [SerializeField] private float m_range = 4f;
         [SerializeField] private Transform m_shootPoint;
         [SerializeField] private LayerMask m_enemyLayer;
+        [Header("Pool Parametres")]
+        [SerializeField] private int m_poolCount = 10;
+        [SerializeField] private bool m_autoExpand = false;
         [SerializeField] private Projectile m_projectilePrefab;
 
+        private ObjectPool<Projectile> m_pool;
         private Transform m_target;
         private bool m_canShoot = true;
 
-        protected abstract void Shot(Projectile projectile, Transform shootPoint, Transform shootTarget);
-		
+        protected abstract void Shot();
+
+        private void Start()
+        {
+            m_pool = new ObjectPool<Projectile>(m_projectilePrefab, m_poolCount, transform);
+            m_pool.AutoExpand = m_autoExpand;
+        }
+        
+
         private void Update()
         {
             CheckEnemy();
 
             if (m_target!=null && m_canShoot)
             {
-                Shot(m_projectilePrefab, m_shootPoint, m_target);
-                StartCoroutine(shootReload());
+                Shot();
+                StartCoroutine(ShootReload());
             }
         }
 
@@ -44,7 +57,7 @@ namespace Scripts.GamePlayLogic
                 m_target = null;
         }
 
-        private IEnumerator shootReload()
+        private IEnumerator ShootReload()
         {
             m_canShoot = false;
 
@@ -52,5 +65,20 @@ namespace Scripts.GamePlayLogic
 
             m_canShoot = true;
         }
+
+        protected Projectile CreateProjectile()
+        {
+            if (m_shootPoint != null)
+            {
+                var projectile = m_pool.GetFreeElement();
+                projectile.transform.position = m_shootPoint.position;
+                projectile.Target = m_target;
+            
+                return projectile;
+            }
+            
+            throw new Exception("Shoot point is null!");
+        }
+        
     }
 }

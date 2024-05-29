@@ -1,30 +1,25 @@
 ﻿using UnityEngine;
 
-namespace Scripts.GamePlayLogic
+namespace GamePlayLogic
 {
     public abstract class Projectile : MonoBehaviour
     {
-        [SerializeField] private float m_speed = 0.2f;
+        [SerializeField] private float m_speed = 8f;
         [SerializeField] int m_damage = 10;
 
         private Transform m_target;
 
         public Transform Target
         {
-            get
-            {
-                return m_target;
-            }
-
+            get{return m_target;}
+            
             set
             {
                 if (m_target == null)
-                {
                     m_target = value;
-                }
             }
         }
-
+        
         protected abstract void Move(float speed);
         
         private void Update() => Move(m_speed);
@@ -36,7 +31,15 @@ namespace Scripts.GamePlayLogic
             if (isMonster)
                 monster.Hit(m_damage);
 			
-            Destroy (gameObject);
+            Deactivate();
         }
+
+        protected void Deactivate()
+        {
+            gameObject.transform.position = transform.parent.position;
+            gameObject.SetActive(false);
+            
+        }
+           
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Scripts.GamePlayLogic
+﻿using UnityEngine;
+
+namespace GamePlayLogic
 {
 	public class GuidedProjectile : Projectile
 	{
@@ -6,18 +8,12 @@
 		{
 			if (Target == null) 
 			{
-				Destroy (gameObject);
+				Deactivate();
 				return;
 			}
-
-			var translation = Target.transform.position - transform.position;
 			
-			if (translation.magnitude > speed) 
-			{
-				translation = translation.normalized * speed;
-			}
+			transform.position	= Vector3.MoveTowards(transform.position, Target.position , speed *Time.deltaTime);
 			
-			transform.Translate (translation);
 		}
 	}
 }

@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-namespace Scripts.GamePlayLogic
+namespace GamePlayLogic
 {
 	public class SimpleTower : Tower
 	{
-		protected override void Shot(Projectile projectilePrefab, Transform shootPoint,Transform target)
+		protected override void Shot()
 		{
-			Projectile projectile =  Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-			projectile.Target = target;
+			Projectile projectile = CreateProjectile();
 		}
 	}
 }

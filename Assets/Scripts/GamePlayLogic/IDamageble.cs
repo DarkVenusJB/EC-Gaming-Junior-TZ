@@ -1,4 +1,4 @@
-﻿namespace Scripts.GamePlayLogic
+﻿namespace GamePlayLogic
 {
     public interface IDamageble
     {

@@ -13,18 +13,28 @@ namespace GamePlayLogic
         {
             get{return m_target;}
             
-            set
-            {
-                if (m_target == null)
-                    m_target = value;
-            }
+            set {m_target = value;}
         }
         
+        public Vector3 Direction { get; set; }
+        
+        public float Speed => m_speed;
+
         protected abstract void Move(float speed);
         
         private void Update() => Move(m_speed);
-
+        
         private void OnTriggerEnter(Collider other)
+        {
+            bool isMonster = other.gameObject.TryGetComponent(out IDamageble monster);
+
+            if (isMonster)
+                monster.Hit(m_damage);
+			
+            Deactivate();
+        }
+
+        private void OnCollisionEnter(Collision other)
         {
             bool isMonster = other.gameObject.TryGetComponent(out IDamageble monster);
 
@@ -37,9 +47,11 @@ namespace GamePlayLogic
         protected void Deactivate()
         {
             gameObject.transform.position = transform.parent.position;
+            if (gameObject.GetComponent<Rigidbody>() != null)
+            {
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
             gameObject.SetActive(false);
-            
         }
-           
     }
 }

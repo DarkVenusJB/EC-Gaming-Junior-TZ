@@ -21,8 +21,6 @@ namespace GamePlayLogic
 			m_pool.AutoExpand = m_autoExpand;
 		}
 		
-		
-
 		private void Update () 
 		{
 			if (Time.time > m_lastSpawn + m_interval)
@@ -39,7 +37,6 @@ namespace GamePlayLogic
 			var monster = m_pool.GetFreeElement();
 			monster.transform.position = transform.position;
 			
-
 			return monster;
 		}
 	}

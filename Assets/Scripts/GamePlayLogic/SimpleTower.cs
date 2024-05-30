@@ -1,13 +1,19 @@
-﻿using UnityEngine;
-
-namespace GamePlayLogic
+﻿namespace GamePlayLogic
 {
 	public class SimpleTower : Tower
 	{
-		protected override void Shot()
+		private void Update()
 		{
-			Projectile projectile = CreateProjectile();
+			CheckEnemy();
+
+			if (Target!=null && CanShoot)
+			{
+				Shot();
+				StartCoroutine(ShootReload());
+			}
 		}
+		
+		protected override void Shot() =>CreateProjectile();
 	}
 }
 

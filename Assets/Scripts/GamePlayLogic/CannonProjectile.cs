@@ -6,6 +6,10 @@ namespace GamePlayLogic
 	public class CannonProjectile : Projectile
 	{
 		[SerializeField] private float m_lifeTime=5f;
+
+		private Rigidbody m_rigidbody;
+
+		private void Start() => m_rigidbody = GetComponent<Rigidbody>();
 		
 		private void OnEnable() => StartCoroutine(LifeRoutine());
 		
@@ -13,8 +17,7 @@ namespace GamePlayLogic
 		
 		protected override void Move(float speed)
 		{
-			var translation = transform.forward * (speed * Time.deltaTime);
-			transform.Translate (translation);
+			m_rigidbody.velocity = Direction * speed;
 		}
 
 		private IEnumerator LifeRoutine()

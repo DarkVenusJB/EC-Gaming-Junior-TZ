@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4460249840133075291, guid: 7ac56bab20be57a49b715c98471c1346, type: 3}
+      propertyPath: m_poolCount
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -361,7 +365,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interval: 2
   m_moveTarget: {fileID: 1793304110}
-  monster: {fileID: 6175578579780283844, guid: 7d8057250fed0a2408899c6819ba3bd4, type: 3}
+  m_poolCount: 6
+  m_autoExpand: 0
+  m_monsterPrefab: {fileID: 6175578579780283844, guid: 7d8057250fed0a2408899c6819ba3bd4, type: 3}
 --- !u!4 &780892721
 Transform:
   m_ObjectHideFlags: 0
@@ -371,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 780892719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.12, y: 1, z: 6.02}
+  m_LocalPosition: {x: 18.12, y: 1.257, z: 6.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -710,6 +716,10 @@ PrefabInstance:
     - target: {fileID: 494260, guid: adff1ae3360dcb14fb5fbd7774d0ce0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927279767817057790, guid: adff1ae3360dcb14fb5fbd7774d0ce0d, type: 3}
+      propertyPath: m_poolCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

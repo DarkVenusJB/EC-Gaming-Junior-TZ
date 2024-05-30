@@ -13,7 +13,6 @@ namespace GamePlayLogic
 			}
 			
 			transform.position	= Vector3.MoveTowards(transform.position, Target.position , speed *Time.deltaTime);
-			
 		}
 	}
 }

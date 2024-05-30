@@ -20,27 +20,23 @@ namespace GamePlayLogic
         private Transform m_target;
         private bool m_canShoot = true;
 
+        protected Transform Target => m_target;
+
+        protected Transform ShootPoint => m_shootPoint;
+
+        protected bool CanShoot => m_canShoot;
+
+        protected float ProjectileSpeed => m_projectilePrefab.Speed;
+
         protected abstract void Shot();
 
         private void Start()
         {
-            m_pool = new ObjectPool<Projectile>(m_projectilePrefab, m_poolCount, transform);
+            m_pool = new ObjectPool<Projectile>(m_projectilePrefab, m_poolCount, transform.parent);
             m_pool.AutoExpand = m_autoExpand;
         }
         
-
-        private void Update()
-        {
-            CheckEnemy();
-
-            if (m_target!=null && m_canShoot)
-            {
-                Shot();
-                StartCoroutine(ShootReload());
-            }
-        }
-
-        private void CheckEnemy()
+        protected void CheckEnemy()
         {
             if (m_target == null)
             {
@@ -57,7 +53,7 @@ namespace GamePlayLogic
                 m_target = null;
         }
 
-        private IEnumerator ShootReload()
+        protected IEnumerator ShootReload()
         {
             m_canShoot = false;
 
@@ -72,8 +68,9 @@ namespace GamePlayLogic
             {
                 var projectile = m_pool.GetFreeElement();
                 projectile.transform.position = m_shootPoint.position;
+                projectile.transform.rotation = m_shootPoint.rotation;
                 projectile.Target = m_target;
-            
+
                 return projectile;
             }
             

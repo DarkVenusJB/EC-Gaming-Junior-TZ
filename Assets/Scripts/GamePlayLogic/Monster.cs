@@ -8,10 +8,10 @@ namespace GamePlayLogic
 		
 		[SerializeField] private float m_speed = 5f;
 		[SerializeField] private int m_maxHP = 30;
-		[SerializeField] private int m_currentHP ;
-
+		
 		private Transform m_moveTarget;
 		private Rigidbody m_rigidbody;
+		private int m_currentHP;
 
 		public Transform MoveTarget
 		{

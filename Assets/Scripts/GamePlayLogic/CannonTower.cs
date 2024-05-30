@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GamePlayLogic
 {
 	public class CannonTower : Tower
 	{
-		private Monster m_monster =null;
+		[Header("Cannon Rotation")]
+		[SerializeField] private CannonRotator m_rotator;
+		[FormerlySerializedAs("m_rotateSpeed")] [SerializeField] private float m_cannonRotateSpeed =5f;
 		
 		private void Update()
         {
@@ -13,7 +16,7 @@ namespace GamePlayLogic
             if(Target ==null)
 	            return;
             
-            transform.LookAt((CalculateTargetCorrection() -ShootPoint.position));
+            m_rotator.RotateCannon(CalculateTargetCorrection()-ShootPoint.position,m_cannonRotateSpeed);
             
             if (CanShoot)
             {

@@ -335,8 +335,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_shootInterval: 2
   m_range: 4
-  m_projectilePrefab: {fileID: 123704, guid: 4124357cfe121804f9eea0a690ce3b52, type: 3}
   m_shootPoint: {fileID: 0}
+  m_enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  m_poolCount: 10
+  m_autoExpand: 0
+  m_projectilePrefab: {fileID: 11464742, guid: 4124357cfe121804f9eea0a690ce3b52, type: 3}
 --- !u!1 &190336
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +663,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -711,7 +716,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:

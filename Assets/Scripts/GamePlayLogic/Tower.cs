@@ -20,9 +20,9 @@ namespace GamePlayLogic
         private Transform m_target;
         private bool m_canShoot = true;
 
-        protected Transform Target => m_target;
+        public Transform Target => m_target;
 
-        protected Transform ShootPoint => m_shootPoint;
+        public Transform ShootPoint => m_shootPoint;
 
         protected bool CanShoot => m_canShoot;
 

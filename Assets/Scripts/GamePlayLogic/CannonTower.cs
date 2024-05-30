@@ -35,11 +35,11 @@ namespace GamePlayLogic
 		{
 			Vector3 direction = Target.position - ShootPoint.position;
 			float distance = Vector3.Distance(ShootPoint.position,Target.position);
-			float correction =Mathf.Atan2(Target.GetComponent<Rigidbody>().velocity.x,Target.GetComponent<Rigidbody>().velocity.y);
+			float correction = Mathf.Atan2(Target.GetComponent<Rigidbody>().velocity.x,Target.GetComponent<Rigidbody>().velocity.y);
 
-			Vector3 shootPosition = Target.position + (direction + new Vector3(correction,0 , 0))*distance;
+			Vector3 shootPosition = Target.position + (direction + new Vector3(correction,0 ,0))*distance;
 
-			return (shootPosition)*ProjectileSpeed;
+			return(shootPosition)*ProjectileSpeed;
 		}
 	}
 }
